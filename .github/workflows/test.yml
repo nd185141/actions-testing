@@ -3,9 +3,9 @@ name: Test workflow
 on:
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
 
@@ -15,7 +15,7 @@ jobs:
       - name: Check branch name
         run: |-
           echo "${{ github.head_ref || github.ref_name }}"
-          
+
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'

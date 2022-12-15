@@ -38,6 +38,7 @@ jobs:
         shell: bash
         run: |
           mkdir logs
+          cd logs
           curl \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ env.TOKEN }}" \
@@ -45,18 +46,7 @@ jobs:
             https://api.github.com/repos/${{github.repository}}/actions/runs/${{github.run_id}}/logs \
             --output ./logs.zip
           unzip ./logs.zip
-
-
-      # unzip Folder
-      - name: zip assets folder for Master (or) Release Branches
-        shell: bash
-        run: |-
-          sudo apt install unzip
-          unzip ./logs.zip
-        env:
-          DEV_PROJECT_ID: com-sco-cug01-dev
-          STG_PROJECT_ID: ret-sco-cug01-stg
-
+          cd ..
 
       - name: Upload Test Artifacts
         if: ${{ always() }}
